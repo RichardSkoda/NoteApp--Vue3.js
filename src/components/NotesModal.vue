@@ -44,21 +44,21 @@
                         </div>
                     </div>
     
-                    <div class="close-button-container">
-                    <button
-                        type="button"
-                        class="close-button"
-                        @click="closeModal"
-                    >
-                        Save
-                    </button>
-                    <button
-                        type="button"
-                        class="close-button"
-                        @click="closeModal"
-                    >
-                        Cancel
-                    </button>
+                    <div class="buttons-container">
+                        <button
+                            type="button"
+                            class="button"
+                            @click="closeModal"
+                        >
+                            Save
+                        </button>
+                        <button
+                            type="button"
+                            class="button"
+                            @click="closeModal"
+                        >
+                            Cancel
+                        </button>
                     </div>
                 </DialogPanel>
                 </TransitionChild>
@@ -182,7 +182,7 @@
         border-radius: 5px;
     }
 
-    .close-button-container {
+    .buttons-container {
         display: flex;
         gap: 1rem;
         margin-top: 0.5rem;
@@ -190,13 +190,18 @@
         margin-top: 1rem;
     }
 
-    .close-button {
+    .button {
         min-width: 5rem;
-        background-color: #71717a;
-        color: white;
-        border: none;
+        color: #71717a;
+        border: solid 1px #71717a;
         border-radius: 5px;
-        padding: 15px;
+        padding: 10px 15px;
         cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #71717a;
+      color: white;
     }
   </style>

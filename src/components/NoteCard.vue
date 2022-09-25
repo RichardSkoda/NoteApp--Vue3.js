@@ -28,7 +28,8 @@
     .note-card-container {
         display: flex;
         justify-content: space-between;
-        min-height: 340px;
+        min-height: 300px;
+        max-height: 50vh;
         background-color: #71717a;
         border-radius: 1%;
     }

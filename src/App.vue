@@ -36,17 +36,20 @@ const updateDeleteModal = (e: boolean) => {
   <div class="note-container">
     <NoteCard 
       @showdeletemodal="openDeleteModal"
-      />
-    <a class="plus-card" @click="openAddNoteModal">
+    />
+    <div class="plus-card-container">
+      <a class="plus-card" @click="openAddNoteModal">
         <font-awesome-icon icon="fa-solid fa-circle-plus" class="plus-icon" />
-    </a>
+      </a>
+    </div>
     <NotesModal 
       :open-modal="showModal"
       @showmodal="updateShowModal"
     />
     <DeleteModal 
       :open-modal="showDeleteModal"
-      @showdeletemodal="updateDeleteModal"/>
+      @showdeletemodal="updateDeleteModal"
+    />
   </div>
 </template>
 
@@ -75,29 +78,42 @@ body {
 }
 
 /* add button style */
+.plus-card-container {
+    min-height: 300px;
+    max-height: 50vh;
+}
+
 .plus-card {
-        border: solid 2px #71717a;
-        border-radius: 1%;
-        background-color: #0f0f0f;
-        color: white;
-        cursor: pointer;
-        opacity: 0.5;
-        transition: all 0.2s ease;
-        margin: 10%;
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 85%;
+    width: 85%;
+    border: solid 2px #71717a;
+    border-radius: 1%;
+    background-color: #0f0f0f;
+    color: white;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.2s ease;
     }
 
-    .plus-card:hover {
-        opacity: 1;
-        margin: 0;
-    }
+.plus-card:hover {
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    margin: 0;
+}
 
-    .plus-icon {
-        position: relative;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        font-size: 50px;
+.plus-icon {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 50px;
 }
 
 </style>

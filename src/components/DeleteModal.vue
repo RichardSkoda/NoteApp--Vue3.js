@@ -33,24 +33,30 @@
                   as="h3"
                   class="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Payment successful
+                  Delete
                 </DialogTitle>
                 <div class="mt-2">
                   <p class="text-sm text-gray-500">
-                    Your payment has been successfully submitted. We’ve sent you
-                    an email with all of the details of your order.
+                    Are you sure you want to delete this note?
                   </p>
                 </div>
   
-                <div class="mt-4">
-                  <button
-                    type="button"
-                    class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    @click="closeModal"
-                  >
-                    Got it, thanks!
-                  </button>
-                </div>
+                <div class="buttons-container">
+                        <button
+                            type="button"
+                            class="button"
+                            @click="closeModal"
+                        >
+                            Ok
+                        </button>
+                        <button
+                            type="button"
+                            class="button"
+                            @click="closeModal"
+                        >
+                            Cancel
+                        </button>
+                    </div>
               </DialogPanel>
             </TransitionChild>
           </div>
@@ -95,4 +101,29 @@
   }
 
   </script>
+
+  <style scoped>
+    .buttons-container {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.5rem;
+        justify-content: right;
+        margin-top: 1rem;
+    }
+
+    .button {
+        min-width: 5rem;
+        color: #71717a;
+        border: solid 1px #71717a;
+        border-radius: 5px;
+        padding: 10px 15px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #71717a;
+      color: white;
+    }
+  </style>
   
