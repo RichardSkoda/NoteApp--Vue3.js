@@ -6,12 +6,21 @@
         </div>
         <div class="icon-container">
             <font-awesome-icon icon="fa-solid fa-pen-nib" class="icon" />
-            <font-awesome-icon icon="fa-solid fa-trash-can" class="icon" />
+            <font-awesome-icon icon="fa-solid fa-trash-can" class="icon" @click="deleteNoteModal" />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+
+    // set emit
+    const emit = defineEmits<{
+        (e: 'showdeletemodal', id: boolean): void
+    }>()
+
+    const deleteNoteModal = () => {
+        emit('showdeletemodal', true)
+    }
 
 </script>
 

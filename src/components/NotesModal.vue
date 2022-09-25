@@ -1,13 +1,14 @@
 <template>
-    <div>
-        <button class="open-button" @click="openModal">
-            Press me!
-        </button>
-    </div>
     <TransitionRoot appear :show="isOpen" as="template">
       <Dialog as="div" @close="closeModal" class="modal-dialog">
         <TransitionChild
-          class="overlay-transition"
+          as="template"
+          enter="duration-300 ease-out"
+          enter-from="opacity-0"
+          enter-to="opacity-100"
+          leave="duration-200 ease-in"
+          leave-from="opacity-100"
+          leave-to="opacity-0"
         >
             <div class="modal-overlay"></div>
         </TransitionChild>
@@ -15,7 +16,13 @@
         <div class="modal-container">
             <div class="modal">
                 <TransitionChild
-                class="modal-transition"
+                    as="template"
+                    enter="duration-300 ease-out"
+                    enter-from="opacity-0 scale-95"
+                    enter-to="opacity-100 scale-100"
+                    leave="duration-200 ease-in"
+                    leave-from="opacity-100 scale-100"
+                    leave-to="opacity-0 scale-95"
                 >
                 <DialogPanel
                     class="dialog-panel"
@@ -59,10 +66,11 @@
         </div>
       </Dialog>
     </TransitionRoot>
+    <div></div>
   </template>
   
   <script setup lang="ts">
-    import { ref } from 'vue'
+    import { ref, watch } from 'vue'
     import {
       TransitionRoot,
       TransitionChild,
@@ -72,30 +80,35 @@
     } from '@headlessui/vue'
   
     const isOpen = ref(false)
-  
-    function openModal() {
-      isOpen.value = true
+
+    // set props
+    interface Props {
+        openModal: boolean
     }
 
+    const props = withDefaults(defineProps<Props>(), {
+        openModal: false
+    })
+
+    // set emit
+    const emit = defineEmits<{
+        (e: 'showmodal', id: boolean): void
+    }>()
+
+    watch(props,() => {
+        isOpen.value = props.openModal
+    })
+
+    // function send false to showModal in App.vue after modal close. It is done by emit()
     function closeModal() {
+        emit('showmodal', false)
         isOpen.value = false
     }
-
   </script>
 
   <style scoped>
-    .open-button {
-        background-color: pink;
-        color: white;
-        padding: 20px;
-    }
-
     .modal-dialog {
         position: relative;
-    }
-
-    .overly-transition {
-        transition-duration: 2;
     }
 
     .modal-overlay {
@@ -108,11 +121,6 @@
         z-index: 100;
         transition-duration: 2;
     }
-
-    .modal-transition {
-        
-    }
-
 
     .modal-container {
         position: fixed;
@@ -170,6 +178,8 @@
     input,
     textarea {
         outline: none;
+        border: solid 1px #71717a;
+        border-radius: 5px;
     }
 
     .close-button-container {
@@ -185,7 +195,7 @@
         background-color: #71717a;
         color: white;
         border: none;
-        border-radius: 5%;
+        border-radius: 5px;
         padding: 15px;
         cursor: pointer;
     }
