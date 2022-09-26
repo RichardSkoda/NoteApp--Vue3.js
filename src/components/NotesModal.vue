@@ -36,11 +36,11 @@
                     <div class="modal-info-container">
                         <div class="title-input-container">
                             <label for="">Title</label>
-                            <input type="text" placeholder="Enter Note Title">
+                            <input type="text" v-model="title" placeholder="Enter Note Title">
                         </div>
                         <div class="textarea-container">
                             <label for="">Points</label>
-                            <textarea name="" id="" cols="20" rows="5"></textarea>
+                            <textarea v-model="point" name="" id="" cols="20" rows="5"></textarea>
                         </div>
                     </div>
     
@@ -50,14 +50,14 @@
                             class="button"
                             @click="closeModal"
                         >
-                            Save
+                            Cancel
                         </button>
                         <button
                             type="button"
                             class="button"
-                            @click="closeModal"
+                            @click="saveNote"
                         >
-                            Cancel
+                            Save
                         </button>
                     </div>
                 </DialogPanel>
@@ -78,8 +78,12 @@
       DialogPanel,
       DialogTitle
     } from '@headlessui/vue'
+
+    import { newNote } from '../common.interface';
   
     const isOpen = ref(false)
+    const title = ref('')
+    const point = ref('')
 
     // set props
     interface Props {
@@ -93,6 +97,7 @@
     // set emit
     const emit = defineEmits<{
         (e: 'showmodal', id: boolean): void
+        (e: 'savenote', value: newNote): void
     }>()
 
     watch(props,() => {
@@ -103,6 +108,15 @@
     function closeModal() {
         emit('showmodal', false)
         isOpen.value = false
+    }
+
+    const saveNote = () => {
+        emit('showmodal', false)
+        let newNote = {
+            title:title.value,
+            point:point.value
+        }
+        emit('savenote', newNote)
     }
   </script>
 
@@ -193,7 +207,7 @@
     .button {
         min-width: 5rem;
         color: #71717a;
-        border: solid 1px #71717a;
+        /* border: solid 1px #71717a; */
         border-radius: 5px;
         padding: 10px 15px;
         cursor: pointer;
@@ -201,7 +215,7 @@
     }
 
     button:hover {
-      background-color: #71717a;
+      background-color: rgb(209, 128, 142);
       color: white;
     }
   </style>

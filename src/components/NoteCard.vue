@@ -1,8 +1,8 @@
 <template>
     <div class="note-card-container">
         <div class="title-container">
-            <h1>Title</h1>
-            <p>Points</p>
+            <h1>{{ note.title }}</h1>
+            <p>{{ note.point }}</p>
         </div>
         <div class="icon-container">
             <font-awesome-icon icon="fa-solid fa-pen-nib" class="icon" />
@@ -12,6 +12,21 @@
 </template>
 
 <script setup lang="ts">
+
+import { Note } from '../common.interface';
+
+    // set props
+    interface Props {
+        note: Note;
+    }
+
+    const props = withDefaults(defineProps<Props>(), {
+        note : {
+            id:0,
+            title:'',
+            point:''
+        }
+    })
 
     // set emit
     const emit = defineEmits<{

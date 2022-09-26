@@ -3,13 +3,15 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 
 import { ref } from 'vue';
+
+import { newNote, Note } from './common.interface'
 import NoteCard from './components/NoteCard.vue';
 import NotesModal from './components/NotesModal.vue';
 import DeleteModal from './components/DeleteModal.vue';
 
-
 const showModal = ref(false);
 const showDeleteModal = ref(false);
+const notes = ref(Array<Note>());
 
 const openAddNoteModal = () => {
     showModal.value = true;
@@ -28,6 +30,15 @@ const updateDeleteModal = (e: boolean) => {
   showDeleteModal.value = e
 }
 
+const addNote = (note: newNote) => {
+  let newNote = {
+    id: notes.value.length + 1,
+    title: note.title,
+    point: note.point
+  }
+  notes.value.push(newNote);
+  console.log('notes ....', notes.value)
+}
 
 
 </script>
@@ -35,6 +46,7 @@ const updateDeleteModal = (e: boolean) => {
 <template>
   <div class="note-container">
     <NoteCard 
+    v-for="note in notes"
       @showdeletemodal="openDeleteModal"
     />
     <div class="plus-card-container">
@@ -45,6 +57,7 @@ const updateDeleteModal = (e: boolean) => {
     <NotesModal 
       :open-modal="showModal"
       @showmodal="updateShowModal"
+      @newNote="addNote"
     />
     <DeleteModal 
       :open-modal="showDeleteModal"
