@@ -105,18 +105,19 @@
     })
 
     // function send false to showModal in App.vue after modal close. It is done by emit()
-    function closeModal() {
+    const closeModal = () => {
         emit('showmodal', false)
         isOpen.value = false
     }
 
     const saveNote = () => {
         emit('showmodal', false)
-        let newNote = {
+        isOpen.value = false
+        let newnote = {
             title:title.value,
             point:point.value
         }
-        emit('savenote', newNote)
+        emit('savenote', newnote)
     }
   </script>
 

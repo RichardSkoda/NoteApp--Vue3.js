@@ -48,6 +48,7 @@ const addNote = (note: newNote) => {
     <NoteCard 
     v-for="note in notes"
       @showdeletemodal="openDeleteModal"
+      :note="note"
     />
     <div class="plus-card-container">
       <a class="plus-card" @click="openAddNoteModal">
@@ -57,7 +58,7 @@ const addNote = (note: newNote) => {
     <NotesModal 
       :open-modal="showModal"
       @showmodal="updateShowModal"
-      @newNote="addNote"
+      @savenote="addNote"
     />
     <DeleteModal 
       :open-modal="showDeleteModal"

@@ -17,16 +17,17 @@ import { Note } from '../common.interface';
 
     // set props
     interface Props {
-        note: Note;
+        note:Note
     }
 
     const props = withDefaults(defineProps<Props>(), {
-        note : {
+        note: {
             id:0,
             title:'',
             point:''
         }
     })
+
 
     // set emit
     const emit = defineEmits<{
